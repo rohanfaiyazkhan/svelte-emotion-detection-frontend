@@ -24,8 +24,8 @@
 		<p class="text-lg mt-4 mb-4">Attach a file:</p>
 	</div>
 
-	<div
-		class="w-40 h-40 hover:cursor-pointer focus:bg-gray-300 hover:bg-gray-400 border-4 rounded-lg border-gray-500"
+	<button
+		class="block w-40 h-40 hover:cursor-pointer focus:border-blue-600 hover:bg-gray-400 border-4 rounded-lg border-gray-500"
 		on:click={() => fileinput.click()}
 		title="Attach a file"
 	>
@@ -43,7 +43,7 @@
 			on:change={(e) => onFileSelected(e)}
 			bind:this={fileinput}
 		/>
-	</div>
+	</button>
 	<SubmitButton class="mt-4 w-40 text-center" type="submit" disabled={image === undefined}
 		>Upload Image</SubmitButton
 	>
