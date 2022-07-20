@@ -1,2 +1,14 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import FileAttach from '../components/FileAttach.svelte';
+	import ImageUrlInput from '../components/ImageURLInput.svelte';
+	import { Config } from '../app.config';
+
+	console.debug(Config);
+</script>
+
+<h1 class="text-2xl lg:text-3xl font-bold">Facial Emotion Detector Roulette!</h1>
+
+<p class="text-lg mb-4 pb-2">Please enter an image URL or attach a file</p>
+
+<ImageUrlInput />
+<FileAttach />
