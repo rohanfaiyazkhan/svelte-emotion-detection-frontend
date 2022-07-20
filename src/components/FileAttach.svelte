@@ -33,7 +33,7 @@
 			<img class="w-full h-full object-cover" alt="Preview of file to be uploaded" src={preview} />
 		{:else}
 			<div class="w-full h-full flex items-center justify-center  pt-4">
-				<ImageIcon />
+				<ImageIcon alt="Icon by Kmg Design from NounProject.com" />
 			</div>
 		{/if}
 		<input

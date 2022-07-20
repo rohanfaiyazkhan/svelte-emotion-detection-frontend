@@ -1,7 +1,9 @@
 <script>
 	import SubmitButton from './SubmitButton.svelte';
+	import LoadingSpinner from './LoadingSpinner.svelte';
 
 	let imgUrl = '';
+	let loading = false;
 
 	function onSubmit(e) {
 		if (imgUrl.length === 0) return;
@@ -21,6 +23,9 @@
 		name="img_url"
 		bind:value={imgUrl}
 	/>
-	<SubmitButton type="submit" disabled={imgUrl.length === 0}>Submit</SubmitButton>
+
+	<SubmitButton class="flex items-center" type="submit" disabled={imgUrl.length === 0}
+		>Submit {#if loading}<LoadingSpinner class="text-gray-300 ml-2" />{/if}</SubmitButton
+	>
 	<div class="absolute bg-gray-100 px-6 py-2 left-1/2 -bottom-4">OR</div>
 </form>
