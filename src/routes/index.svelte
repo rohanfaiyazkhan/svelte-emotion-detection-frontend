@@ -1,9 +1,6 @@
 <script>
 	import FileAttach from '../components/FileAttach.svelte';
 	import ImageUrlInput from '../components/ImageURLInput.svelte';
-	import { Config } from '../app.config';
-
-	console.debug(Config);
 </script>
 
 <h1 class="text-2xl lg:text-3xl font-bold">Facial Emotion Detector Roulette!</h1>

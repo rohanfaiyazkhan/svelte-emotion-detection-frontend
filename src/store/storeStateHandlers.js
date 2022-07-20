@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { apiDataStore, imageFileDataStore, FileData } from './app.store';
+import { apiDataStore } from './app.store';
 import { makeFileUrlRequest } from '../requests/makeFileUrlRequest';
 
 export async function fetchFileUrltWithStateHandler(url) {

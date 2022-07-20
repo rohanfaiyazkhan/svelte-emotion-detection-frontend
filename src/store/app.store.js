@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { writable, Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 /**
  * @typedef {"success" | "failure" | "loading" | "idle"} LoadingState
