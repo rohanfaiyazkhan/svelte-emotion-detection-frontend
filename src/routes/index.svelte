@@ -1,6 +1,14 @@
 <script>
+	import Results from '../components/Results.svelte';
 	import FileAttach from '../components/FileAttach.svelte';
 	import ImageUrlInput from '../components/ImageURLInput.svelte';
+	import { apiDataStore } from '../store/app.store';
+
+	let loadingState;
+
+	apiDataStore.subscribe((val) => {
+		loadingState = val.loadingState;
+	});
 </script>
 
 <h1 class="text-2xl lg:text-3xl font-bold">Facial Emotion Detector Roulette!</h1>
@@ -9,3 +17,7 @@
 
 <ImageUrlInput />
 <FileAttach />
+
+{#if loadingState === 'success'}
+	<Results />
+{/if}
