@@ -2,9 +2,9 @@
 import { apiDataStore } from './app.store';
 import { makeFileUrlRequest } from '../requests/makeFileUrlRequest';
 import { getTimestampInSeconds } from './../utils/getTimestamp';
+import { makeMultipartFileRequest } from './../requests/makeMultipartFileRequest';
 
 export async function fetchFileUrltWithStateHandler(url) {
-	console.debug('Setting local state', url);
 	apiDataStore.set({
 		updatedOn: getTimestampInSeconds(),
 		loadingState: 'loading',
@@ -28,6 +28,35 @@ export async function fetchFileUrltWithStateHandler(url) {
 			loadingState: 'failure',
 			fileUrl: url,
 			requestType: 'url',
+			error
+		});
+	}
+}
+
+export async function fetchMultipartFiletWithStateHandler(file) {
+	apiDataStore.set({
+		updatedOn: getTimestampInSeconds(),
+		loadingState: 'loading',
+		file: file,
+		requestType: 'upload'
+	});
+
+	try {
+		const response = await makeMultipartFileRequest(file);
+
+		apiDataStore.set({
+			updatedOn: getTimestampInSeconds(),
+			loadingState: 'success',
+			file: file,
+			requestType: 'upload',
+			resource: response
+		});
+	} catch (error) {
+		apiDataStore.set({
+			updatedOn: getTimestampInSeconds(),
+			loadingState: 'failure',
+			file: file,
+			requestType: 'upload',
 			error
 		});
 	}

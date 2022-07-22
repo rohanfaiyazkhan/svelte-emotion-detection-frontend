@@ -1,10 +1,14 @@
 <script>
 	import ImageIcon from '../assets/noun-image-2718571.svg';
 	import SubmitButton from './SubmitButton.svelte';
+	import { apiDataStore } from '../store/app.store';
+	import LoadingSpinner from './LoadingSpinner.svelte';
+	import { makeMultipartFileRequest } from '../requests/makeMultipartFileRequest';
 
-	let preview;
-	let image;
-	let fileinput;
+	let preview, image, fileinput;
+
+	let loading = false,
+		error;
 
 	const onFileSelected = (e) => {
 		image = e.target.files[0];
@@ -16,10 +20,21 @@
 		};
 	};
 
-	const onSubmit = (e) => {};
+	const onSubmit = (e) => {
+		if (image) {
+			makeMultipartFileRequest(image);
+		}
+	};
+
+	apiDataStore.subscribe((data) => {
+		loading = data.requestType === 'upload' && data.loadingState === 'loading';
+
+		error =
+			data.requestType === 'upload' && data.loadingState === 'failure' ? data.error : undefined;
+	});
 </script>
 
-<form on:submit={onSubmit}>
+<form on:submit|preventDefault={onSubmit}>
 	<div class="relative">
 		<p class="text-lg mt-4 mb-4">Attach a file:</p>
 	</div>
@@ -44,7 +59,10 @@
 			bind:this={fileinput}
 		/>
 	</button>
-	<SubmitButton class="mt-4 w-40 text-center" type="submit" disabled={image === undefined}
-		>Upload Image</SubmitButton
+	<SubmitButton
+		class="flex items-center justify-center mt-4 w-40 text-center"
+		type="submit"
+		disabled={image === undefined}
+		>Upload Image{#if loading}<LoadingSpinner class="text-gray-300 ml-2" />{/if}</SubmitButton
 	>
 </form>

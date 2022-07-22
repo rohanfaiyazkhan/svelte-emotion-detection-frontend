@@ -15,10 +15,9 @@
 	}
 
 	apiDataStore.subscribe((data) => {
-		console.debug(data);
 		loading = data.requestType === 'url' && data.loadingState === 'loading';
 
-		error = data.loadingState === 'failure' ? data.error : undefined;
+		error = data.requestType === 'url' && data.loadingState === 'failure' ? data.error : undefined;
 	});
 </script>
 
