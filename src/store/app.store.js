@@ -18,7 +18,7 @@ import { derived, writable } from 'svelte/store';
  *  resource?: ApiResults;
  *  requestType?: "url" | "upload"
  *  fileUrl?: string;
- *  file?: File
+ *  filePreview?: unknown;
  * }} ApiData
  *
 

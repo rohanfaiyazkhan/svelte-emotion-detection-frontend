@@ -3,7 +3,7 @@
 	import SubmitButton from './SubmitButton.svelte';
 	import { apiDataStore } from '../store/app.store';
 	import LoadingSpinner from './LoadingSpinner.svelte';
-	import { makeMultipartFileRequest } from '../requests/makeMultipartFileRequest';
+	import { fetchMultipartFiletWithStateHandler } from '../store/storeStateHandlers';
 
 	let preview, image, fileinput;
 
@@ -21,8 +21,8 @@
 	};
 
 	const onSubmit = (e) => {
-		if (image) {
-			makeMultipartFileRequest(image);
+		if (image && preview) {
+			fetchMultipartFiletWithStateHandler(image, preview);
 		}
 	};
 
@@ -40,7 +40,7 @@
 	</div>
 
 	<button
-		class="block w-40 h-40 hover:cursor-pointer focus:border-blue-600 hover:bg-gray-400 border-4 rounded-lg border-gray-500"
+		class="block w-52 h-52 hover:cursor-pointer focus:border-blue-600 hover:bg-gray-400 border-4 rounded-lg border-gray-500"
 		on:click={() => fileinput.click()}
 		title="Attach a file"
 	>
@@ -60,7 +60,7 @@
 		/>
 	</button>
 	<SubmitButton
-		class="flex items-center justify-center mt-4 w-40 text-center"
+		class="flex items-center justify-center mt-4 w-52 text-center"
 		type="submit"
 		disabled={image === undefined}
 		>Upload Image{#if loading}<LoadingSpinner class="text-gray-300 ml-2" />{/if}</SubmitButton

@@ -33,11 +33,11 @@ export async function fetchFileUrltWithStateHandler(url) {
 	}
 }
 
-export async function fetchMultipartFiletWithStateHandler(file) {
+export async function fetchMultipartFiletWithStateHandler(file, preview) {
 	apiDataStore.set({
 		updatedOn: getTimestampInSeconds(),
 		loadingState: 'loading',
-		file: file,
+		filePreview: preview,
 		requestType: 'upload'
 	});
 
@@ -47,7 +47,7 @@ export async function fetchMultipartFiletWithStateHandler(file) {
 		apiDataStore.set({
 			updatedOn: getTimestampInSeconds(),
 			loadingState: 'success',
-			file: file,
+			filePreview: preview,
 			requestType: 'upload',
 			resource: response
 		});
@@ -55,7 +55,7 @@ export async function fetchMultipartFiletWithStateHandler(file) {
 		apiDataStore.set({
 			updatedOn: getTimestampInSeconds(),
 			loadingState: 'failure',
-			file: file,
+			filePreview: preview,
 			requestType: 'upload',
 			error
 		});

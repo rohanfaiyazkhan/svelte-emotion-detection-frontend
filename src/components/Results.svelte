@@ -6,8 +6,9 @@
 
 	let container, canvas, img;
 	const IMG_WIDTH = 384;
+	const CANVAS_HEIGHT = 1024;
 
-	let file, fileUrl, type, preview, updatedOn;
+	let type;
 
 	onMount(() => {
 		container.scrollIntoView({ behavior: 'smooth' });
@@ -17,20 +18,7 @@
 		const resource = dataStore.resource;
 		const results = resource?.results;
 		const faces = resource?.faces;
-		updatedOn = dataStore.updatedOn;
 		type = dataStore.requestType;
-
-		if (type === 'url') {
-			fileUrl = dataStore.fileUrl;
-		} else if (type === 'upload') {
-			file = dataStore.file;
-
-			let reader = new window.FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = (e) => {
-				preview = e.target.result;
-			};
-		}
 
 		if (resource) {
 			img.onload = function () {
@@ -43,17 +31,28 @@
 				drawRectOnCanvas(ctx, facesScaled, results);
 			};
 
-			img.src = type === 'url' ? fileUrl : type === 'upload' ? preview : '#';
+			if (type === 'url') {
+				img.src = dataStore.fileUrl;
+			} else if (type === 'upload') {
+				const filePreview = dataStore.filePreview;
+
+				img.src = filePreview;
+			}
 		}
 	});
 </script>
 
 <section class="border-t border-gray-500 pt-2 mt-4" bind:this={container}>
-	<h2 class="text-xl mb-2">Results</h2>
+	<h2 class="text-2xl font-bold mb-2">Results</h2>
 
-	<div class="relative" style="width: {IMG_WIDTH}px; height: 550px">
+	<div class="relative" style="width: {IMG_WIDTH}px; height: {CANVAS_HEIGHT}px">
 		<img bind:this={img} width="{IMG_WIDTH}px" alt="Results of inference" />
 
-		<canvas bind:this={canvas} class="absolute top-0 left-0" width="{IMG_WIDTH}px" height="500px" />
+		<canvas
+			bind:this={canvas}
+			class="absolute top-0 left-0"
+			width="{IMG_WIDTH}px"
+			height="{CANVAS_HEIGHT}px"
+		/>
 	</div>
 </section>
