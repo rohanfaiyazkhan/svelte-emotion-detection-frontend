@@ -12,25 +12,25 @@ export async function fetchFileUrltWithStateHandler(url) {
 		requestType: 'url'
 	});
 
-	try {
-		const response = await makeFileUrlRequest(url);
-
-		apiDataStore.set({
-			updatedOn: getTimestampInSeconds(),
-			loadingState: 'success',
-			fileUrl: url,
-			requestType: 'url',
-			resource: response
+	makeFileUrlRequest(url)
+		.then((response) => {
+			apiDataStore.set({
+				updatedOn: getTimestampInSeconds(),
+				loadingState: 'success',
+				fileUrl: url,
+				requestType: 'url',
+				resource: response
+			});
+		})
+		.catch((error) => {
+			apiDataStore.set({
+				updatedOn: getTimestampInSeconds(),
+				loadingState: 'failure',
+				fileUrl: url,
+				requestType: 'url',
+				error
+			});
 		});
-	} catch (error) {
-		apiDataStore.set({
-			updatedOn: getTimestampInSeconds(),
-			loadingState: 'failure',
-			fileUrl: url,
-			requestType: 'url',
-			error
-		});
-	}
 }
 
 export async function fetchMultipartFiletWithStateHandler(file, preview) {

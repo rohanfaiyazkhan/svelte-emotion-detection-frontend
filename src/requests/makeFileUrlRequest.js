@@ -1,4 +1,5 @@
 import { Config } from '../app.config';
+import fetchWrapper from './fetchWrapper';
 
 const API_URL = Config.API_URL;
 
@@ -34,29 +35,19 @@ function testImage(url, timeoutInMs = 5000) {
 
 /** @type {(fileUrl: string) => Promise<any>} */
 export function makeFileUrlRequest(fileUrl) {
-	return new Promise((resolve, reject) => {
-		if (!checkURLisImage(fileUrl)) {
-			reject('File URL is not an image');
-			return;
-		}
+	if (!checkURLisImage(fileUrl)) {
+		return Promise.reject('File URL is not an image');
+	}
 
-		testImage(fileUrl).catch(() => {
-			reject('File URL could not be loaded');
-		});
-
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ img_url: fileUrl })
-		};
-
-		fetch(API_URL, requestOptions)
-			.then((response) => response.json())
-			.then((data) => {
-				resolve(data);
-			})
-			.catch((error) => {
-				reject(error);
-			});
+	testImage(fileUrl).catch(() => {
+		return Promise.reject('File URL could not be loaded');
 	});
+
+	const requestOptions = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ img_url: fileUrl })
+	};
+
+	return fetchWrapper(API_URL, requestOptions);
 }

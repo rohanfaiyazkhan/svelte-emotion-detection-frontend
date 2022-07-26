@@ -27,7 +27,6 @@
 
 				const facesScaled = scaleFacesPixelValues(faces, naturalWidth, IMG_WIDTH);
 
-				console.debug({ naturalWidth, faces, facesScaled, results });
 				drawRectOnCanvas(ctx, facesScaled, results);
 			};
 
