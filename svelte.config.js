@@ -15,7 +15,8 @@ const config = {
 		},
 		paths: {
 			// change below to your repo name
-			base: isProd ? '/svelte-emotion-detection-frontend' : ''
+			base: isProd ? '/svelte-emotion-detection-frontend' : '',
+			assets: isProd ? '/svelte-emotion-detection-frontend' : ''
 		}
 	},
 	preprocess: [
