@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "cross-env NODE_ENV='development' vite dev",
-		"build": "vite build",
+		"build": "cross-env NODE_ENV='production' vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync",
@@ -15,6 +15,8 @@
 	"devDependencies": {
 		"@poppanator/sveltekit-svg": "^0.3.4",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.71",
+		"@sveltejs/adapter-static": "^1.0.0-next.38",
 		"@sveltejs/kit": "next",
 		"autoprefixer": "^10.4.7",
 		"cross-env": "^7.0.3",
@@ -22,6 +24,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.14",
+		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
@@ -29,8 +32,7 @@
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.1.5",
 		"typescript": "^4.7.4",
-		"vite": "^3.0.0",
-		"postcss-load-config": "^4.0.1"
+		"vite": "^3.0.0"
 	},
 	"type": "module"
 }
