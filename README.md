@@ -1,22 +1,10 @@
-# create-svelte
+# Emotion Detection App Frontend
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
+Frontend for app which takes an image of a face and predicts the person's emotion. This frontend is written in Svelte and can be demoed [here](https://dazzling-bavarois-e5c2d1.netlify.app). The backend code is available [here](https://github.com/rohanfaiyazkhan/azure-function-image-classifier).
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To develop locally, first install dependencies with `npm install`, start a development server:
 
 ```bash
 npm run dev
@@ -27,12 +15,10 @@ npm run dev -- --open
 
 ## Building
 
-To create a production version of your app:
+To create a production version of the app:
 
 ```bash
 npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
